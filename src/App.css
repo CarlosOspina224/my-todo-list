@@ -1,0 +1,162 @@
+/* Acá van los colores que se usaran para la aplicación */
+:root {
+  --color-primary: #2E2828;
+  --color-secondary: #503A3A;
+  --color-tertiary: #F65151;
+  --color-quaternary: #FEF4F4;
+  --color-danger: #F65151;
+  --color-success: #336633;
+}
+
+::-webkit-scrollbar {
+  width: .75rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-quaternary);
+  border-radius: 18px;
+}
+
+/* Estilos Core */
+h1 {
+  font-size: calc(1.375rem + 1.5vw);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--bs-heading-color);
+}
+
+button {
+  border-radius: 12px !important;
+  height: 45px;
+}
+
+
+/* Body */
+#root {
+  background-color: var(--color-primary);
+  border-radius: 18px;
+  max-width: 720px;
+  max-height: 75vh;
+  min-height: 555.312px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Header */
+header {
+  height: max-content;
+}
+
+
+/* Main */
+main {
+  margin-top: 30px;
+}
+
+.addTaskSection form {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.inputTask {
+  height: 43px;
+  width: 300px;
+  border: 1px solid var(--color-quaternary);
+  border-radius: 12px;
+  padding: 0 15px;
+}
+
+.buttonAddTask {
+  background-color: var(--color-secondary);
+}
+
+.tasksSection {
+  margin-top: 15px;
+  border: 2px solid var(--color-quaternary);
+  border-radius: 8px;
+  width: 100%;
+  overflow: auto;
+  min-height: 300px;
+  min-width: 720px;
+  max-height: 300px;
+  padding: 15px 0;
+}
+
+.tasksSection article {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.tasksSection article.completed {
+  background-color: var(--color-success);
+  color: var(--color-quaternary);
+}
+
+/* Modificamos el checkbox para que sea más grande y si está checked, tenga un check verde*/
+.taskCompleted input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
+}
+
+.tasksSection article .taskName {
+  text-align: start;
+  width: -webkit-fill-available;
+}
+
+.tasksSection article .taskDone,
+.tasksSection article .taskEdit,
+.tasksSection article .taskDelete {
+  width: 50px;
+}
+
+.tasksSection article span {
+  background-color: var(--color-secondary);
+  color: var(--color-quaternary);
+  border-radius: 50%;
+  width: 25px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+/* Footer */
+footer {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+footer button {
+  background-color: var(--color-secondary);
+  min-width: 200px;
+}
+
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
