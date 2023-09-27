@@ -1,19 +1,28 @@
 {
-  "tasks": [
-    {
-      "text": "Todo 123",
-      "completed": true,
-      "id": 3
-    },
-    {
-      "text": "asd123",
+  "tasks": {
+    "1": {
+      "id": 123,
+      "title": "Task 1",
       "completed": false,
-      "id": 4
+      "isEditing": false
     },
-    {
-      "text": "asd123",
-      "completed": true,
-      "id": 5
+    "2": {
+      "id": 123,
+      "title": "Task 1",
+      "completed": false,
+      "isEditing": false
+    },
+    "3": {
+      "id": 123,
+      "title": "Task 1",
+      "completed": false,
+      "isEditing": false
+    },
+    "4": {
+      "id": 123,
+      "title": "Task 1",
+      "completed": false,
+      "isEditing": false
     }
-  ]
+  }
 }
