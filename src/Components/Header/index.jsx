@@ -9,6 +9,10 @@ export function Header({ handleAddTask }) {
     function handleSubmit(event) {
         event.preventDefault();
 
+        if(title.trim() === '') {
+            alert('Please, type a task before adding it');
+            return;
+        }
         handleAddTask(title)
         setTitle('');
     }

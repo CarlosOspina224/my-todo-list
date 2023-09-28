@@ -13,16 +13,12 @@ export function Task({ task, onComplete, onDelete, onEdit }) {
                 </button>
             </div>
             <div className="taskName">
-                {/* Agrega ek binvre de la tarea */}
+                {/* Agrega el nombre de la tarea */}
                 <p className={task.completed ? "task-completed" : ""}>{task.title}</p>
             </div>
             <div className="taskEdit">
                 {/* Agrega el botón para editar*/}
-                {/* {task.isEditing ?
-                    <span className="material-symbols-outlined">save</span>
-                    :
-                    <span className="material-symbols-outlined" onClick={() => console.log(task.isEditing)}>edit</span>
-                } */}
+                <span className="material-symbols-outlined" onClick={() => onEdit(task.id)}>edit</span>
             </div>
             <div className="taskDelete">
                 {/* Agrega el botón para eliminar */}

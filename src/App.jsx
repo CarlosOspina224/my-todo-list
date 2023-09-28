@@ -1,6 +1,6 @@
 // App.jsx
 import { useEffect, useState } from "react";
-import { loadFromLocalStorage, saveOnLocalStorage, clearLocalStorage, clearLocalStorageByAtribute } from "./Tools/Local_Storage_Tools";
+import { loadFromLocalStorage, saveOnLocalStorage, clearLocalStorage, clearLocalStorageByAttribute, editLocalStorageById } from "./Tools/Local_Storage_Tools";
 
 // Components
 import { Header } from "./Components/Header";
@@ -9,27 +9,31 @@ import { Footer } from "./Components/Footer";
 
 // Styles
 import "./App.css";
-import { EditTask } from "./Components/EditTask";
 
+// Variables
 const LS_KEY = "To-Do-Saved: savedTasks";
 
 function App() {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
+        loadTasks();
+    }, [])
+
+    function loadTasks() {
         const data = loadFromLocalStorage(LS_KEY);
 
         if (data !== null) {
             setTasks(data);
         }
-    }, [])
+    }
 
     function addTask(taskTitle) {
         const newTasks = {
             id: crypto.randomUUID(),
             title: taskTitle,
             completed: false,
-            isEditing: false
+            isEditing: false,
         };
 
         const updatedTasks = [...tasks, newTasks];
@@ -43,10 +47,9 @@ function App() {
         if (!(taskIndice == -1)) {
             const newTasks = tasks[taskIndice];
             newTasks.completed = !(newTasks.completed)
-            console.log(newTasks);
 
-            setTasks([...tasks], newTasks);
-            saveOnLocalStorage(LS_KEY, newTasks);
+            editLocalStorageById(LS_KEY, newTasks.id, newTasks);
+            loadTasks();
         }
     }
 
@@ -55,12 +58,10 @@ function App() {
 
         if (!(taskIndice == -1)) {
             const newTasks = tasks[taskIndice];
-            console.log(newTasks);
             newTasks.isEditing = !(newTasks.isEditing)
-            console.log(newTasks);
 
-            setTasks([...tasks], newTasks);
-            saveOnLocalStorage(LS_KEY, newTasks);
+            editLocalStorageById(LS_KEY, newTasks.id, newTasks);
+            loadTasks();
         }
     }
 
@@ -72,19 +73,19 @@ function App() {
     }
 
     function deleteAllTasks() {
-        clearLocalStorage(LS_KEY);
-        setTasks([]);
+        const clearer = clearLocalStorage(LS_KEY);
+        setTasks(clearer);
     }
 
     function deleteAllCompletedTasks() {
-        clearLocalStorageByAtribute(LS_KEY);
+        clearLocalStorageByAttribute(LS_KEY, "completed", true);
+        setTasks();
     }
 
     return (
         <>
             <Header handleAddTask={addTask} />
             <Main tasks={tasks} onComplete={toggleTaskCompleted} onDelete={deleteTask} onEdit={toggleEditTask} />
-            <EditTask />
             <Footer tasks={setTasks} onDeleteAll={deleteAllTasks} onDeleteAllCompleted={deleteAllCompletedTasks} />
         </>
     );

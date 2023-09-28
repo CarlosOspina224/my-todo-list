@@ -1,8 +1,10 @@
 // Tasks.jsx
-import React from "react";
-import { Task } from "../Task";
+import React, { useState } from "react";
 
-export function Main({ tasks, onComplete, onDelete, onEdit }) {
+import { Task } from "../Task";
+import { EditTask } from "../EditTask";
+
+export function Main({ tasks, onComplete, onDelete, onEdit }) {    
     const taskQuantity = tasks.length;
     const completedTasks = tasks.filter(task => task.completed).length;
     return (
@@ -21,6 +23,7 @@ export function Main({ tasks, onComplete, onDelete, onEdit }) {
                 {tasks.map((task, index) => (
                     <React.Fragment key={task.id}>
                         <Task task={task} onComplete={onComplete} onDelete={onDelete} onEdit={onEdit} />
+                        <EditTask task={task} onEdit={onEdit} />
                         {index !== tasks.length - 1 && <hr />}
                     </React.Fragment>
                 ))}
