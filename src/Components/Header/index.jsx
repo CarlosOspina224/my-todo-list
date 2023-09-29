@@ -1,4 +1,4 @@
-// Header.jsx
+// src\Components\Header\index.jsx
 import { useState } from 'react'
 import logo from '../../assets/react.svg'
 

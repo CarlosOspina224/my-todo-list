@@ -1,4 +1,4 @@
-// Footer.jsx
+// src\Components\Footer\index.jsx
 export function Footer({ onDeleteAll, onDeleteAllCompleted }) {
     
     return (

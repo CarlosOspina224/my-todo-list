@@ -1,3 +1,4 @@
+// src\Components\EditTask\index.jsx
 import { useState } from "react";
 import { editLocalStorageById } from "../../Tools/Local_Storage_Tools";
 
@@ -21,8 +22,8 @@ export function EditTask({ task, onEdit }) {
                 <h2>Edit task name</h2>
                 <form onSubmit={handleSubmit}>
                     <input className="inputTask" placeholder="Type your new task title" type="text" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
-                    <button className="buttonAddTask" onClick={() => onEdit(task.id)}>Cancel</button>
-                    <button className="buttonAddTask">Update</button>
+                    <button type="button" className="buttonAddTask" onClick={() => onEdit(task.id)}>Cancel</button>
+                    <button type="submit" className="buttonAddTask">Update</button>
                 </form>
             </div>
         </div>

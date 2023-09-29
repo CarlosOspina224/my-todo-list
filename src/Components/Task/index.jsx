@@ -1,4 +1,4 @@
-// Task.jsx
+// src\Components\Task\index.jsx
 export function Task({ task, onComplete, onDelete, onEdit }) {
     return (
         <article>

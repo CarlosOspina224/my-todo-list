@@ -17,16 +17,12 @@ function App() {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        loadTasks();
-    }, [])
-
-    function loadTasks() {
         const data = loadFromLocalStorage(LS_KEY);
 
         if (data !== null) {
             setTasks(data);
         }
-    }
+    }, [])
 
     function addTask(taskTitle) {
         const newTasks = {
@@ -49,7 +45,7 @@ function App() {
             newTasks.completed = !(newTasks.completed)
 
             editLocalStorageById(LS_KEY, newTasks.id, newTasks);
-            loadTasks();
+            setTasks([...tasks]);
         }
     }
 
@@ -61,7 +57,7 @@ function App() {
             newTasks.isEditing = !(newTasks.isEditing)
 
             editLocalStorageById(LS_KEY, newTasks.id, newTasks);
-            loadTasks();
+            setTasks([...tasks]);
         }
     }
 
@@ -79,7 +75,7 @@ function App() {
 
     function deleteAllCompletedTasks() {
         clearLocalStorageByAttribute(LS_KEY, "completed", true);
-        setTasks();
+        // loadTasks();
     }
 
     return (

@@ -1,4 +1,4 @@
-// Tasks.jsx
+// src\Components\Main\index.jsx
 import React, { useState } from "react";
 
 import { Task } from "../Task";
