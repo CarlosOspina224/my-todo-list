@@ -1,25 +1,24 @@
-// src\Components\Header\index.jsx
-import { useState } from 'react'
+import { useTasksContext } from '../../Context';
+
 import logo from '../../assets/react.svg'
 
-export function Header({ handleAddTask }) {
-    const [title, setTitle] = useState('');
+/**
+ * Renders the header component with a logo, a form to add tasks and a button to submit the form.
+ * @returns {JSX.Element} The header component.
+ */
+
+export function Header() {
+    const { dispatch } = useTasksContext();
 
     // Enviamos el nombre de la tarea y limpiamos el campo
-    function handleSubmit(event) {
-        event.preventDefault();
+    function handleSubmit(e) {
+        e.preventDefault();
 
-        if(title.trim() === '') {
-            alert('Please, type a task before adding it');
-            return;
-        }
-        handleAddTask(title)
-        setTitle('');
-    }
+        if (e.target[0].value === "") return;
 
-    // Establecemos el valor de title
-    function onChangeTitle(event) {
-        setTitle(event.target.value);
+        dispatch({ type: "ADD_TASK", payload: e.target[0].value });
+
+        e.target[0].value = "";
     }
 
     return (
@@ -28,8 +27,8 @@ export function Header({ handleAddTask }) {
 
             <section className="addTaskSection">
                 <form onSubmit={handleSubmit}>
-                    <input className="inputTask" placeholder="Type your task" type="text" onChange={onChangeTitle} value={title} />
-                    <button className="buttonAddTask">Add</button>
+                    <input className="inputTask" placeholder="Type your task" type="text" />
+                    <button type='submit' className="buttonAddTask">Add</button>
                 </form>
             </section>
         </header>

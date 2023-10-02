@@ -247,6 +247,11 @@ footer button {
   min-width: 200px;
 }
 
+.logo {
+  width: calc(1.375rem + 1.5vw);
+  animation: logo-spin 2.5s linear infinite;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

@@ -1,19 +1,29 @@
-// src\Components\EditTask\index.jsx
-import { useState } from "react";
-import { editLocalStorageById } from "../../Tools/Local_Storage_Tools";
+import { useTasksContext } from "../../Context";
 
-const LS_KEY = "To-Do-Saved: savedTasks";
+/**
+ * Renders a form to edit a task's title.
+ * @param {Object} props - Component props.
+ * @param {Object} props.task - The task to be edited.
+ * @returns {JSX.Element} - The EditTask component.
+ */
 
-export function EditTask({ task, onEdit }) {
-    const [editedTitle, setEditedTitle] = useState(task.title);
+export function EditTask({ task }) {
+    const { dispatch } = useTasksContext();
 
+    // Función para manejar el submit del formulario
     function handleSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        const newTasks = task;
-        newTasks.title = editedTitle
-        onEdit(task.id)
-        editLocalStorageById(LS_KEY, task.id, newTasks);
+        // Crear un objeto con el nuevo título y el resto de las propiedades
+        const newTasks = {
+            id: task.id,
+            title: e.target[0].value,
+            completed: task.completed,
+            isEditing: false,
+        };
+
+        // Enviar el objeto al reducer
+        dispatch({ type: "EDIT_TASK", payload: newTasks });
     }
 
     return (
@@ -21,9 +31,30 @@ export function EditTask({ task, onEdit }) {
             <div className="container">
                 <h2>Edit task name</h2>
                 <form onSubmit={handleSubmit}>
-                    <input className="inputTask" placeholder="Type your new task title" type="text" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
-                    <button type="button" className="buttonAddTask" onClick={() => onEdit(task.id)}>Cancel</button>
-                    <button type="submit" className="buttonAddTask">Update</button>
+                    <input
+                        className="inputTask"
+                        placeholder="Type your new task title"
+                        type="text"
+                        defaultValue={task.title}
+                    />
+                    <button
+                        type="button"
+                        className="buttonAddTask"
+                        onClick={() =>
+                            dispatch({
+                                type: "TOGGLE_EDIT",
+                                payload: {
+                                    isEditing: !task.isEditing,
+                                    id: task.id,
+                                },
+                            })
+                        }
+                    >
+                        Cancel
+                    </button>
+                    <button type="submit" className="buttonAddTask">
+                        Update
+                    </button>
                 </form>
             </div>
         </div>

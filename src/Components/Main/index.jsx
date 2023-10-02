@@ -1,12 +1,20 @@
-// src\Components\Main\index.jsx
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 import { Task } from "../Task";
 import { EditTask } from "../EditTask";
+import { useTasksContext } from "../../Context";
 
-export function Main({ tasks, onComplete, onDelete, onEdit }) {    
-    const taskQuantity = tasks.length;
-    const completedTasks = tasks.filter(task => task.completed).length;
+/**
+ * Renders the main section of the todo list app, including the task header and task section.
+ * @returns {JSX.Element} The JSX code for the main section of the app.
+ */
+
+export function Main() {
+    const { state, dispatch } = useTasksContext();
+
+    const taskQuantity = state.length;
+    const completedTasks = state.filter(task => task.completed).length;
+
     return (
         <main>
             <section className="tasksHeader">
@@ -20,11 +28,12 @@ export function Main({ tasks, onComplete, onDelete, onEdit }) {
                 </div>
             </section>
             <section className="tasksSection">
-                {tasks.map((task, index) => (
+                {state.map((task, index) => (
                     <React.Fragment key={task.id}>
-                        <Task task={task} onComplete={onComplete} onDelete={onDelete} onEdit={onEdit} />
-                        <EditTask task={task} onEdit={onEdit} />
-                        {index !== tasks.length - 1 && <hr />}
+                        <Task
+                            task={task} />
+                        <EditTask task={task} onEdit={() => dispatch({ type: 'TOGGLE_EDIT', payload: task.id })} />
+                        {index !== state.length - 1 && <hr />}
                     </React.Fragment>
                 ))}
             </section>
